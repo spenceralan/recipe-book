@@ -18,8 +18,26 @@
       </select>
       <br>
     </div>
-    <div id="tags" class="col-md-6">
-
+    <div class="col-md-1"></div>
+    <div class="col-md-5">
+      <div id="ingredients" class="row">
+        <h2>Ingredients</h2>
+        <hr>
+        <div class="form-check">
+          <% Ingredient.all.each do |ingredient| %>
+            <%= @recipe.ingredients.include?(ingredient) ? "<div class='checkbox'><label><input value='#{ingredient.id}' type='checkbox' name='ingredients' checked>#{ingredient.name}</label></div>" : "<div class='checkbox'><label><input value='#{ingredient.id}' type='checkbox' name='ingredients'>#{ingredient.name}</label></div>" %>
+          <% end %>
+        </div>
+      </div>
+      <div id="tags" class="row">
+        <h2>Tags</h2>
+        <hr>
+        <div class="form-check">
+          <% Tag.all.each do |tag| %>
+            <%= @recipe.tags.include?(tag) ? "<div class='checkbox'><label><input value='#{tag.id}' type='checkbox' name='tags' checked>#{tag.name}</label></div>" : "<div class='checkbox'><label><input value='#{tag.id}' type='checkbox' name='tags'>#{tag.name}</label></div>" %>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
   <button type="submit" class="btn-lg btn-success outline">Update Recipe</button>

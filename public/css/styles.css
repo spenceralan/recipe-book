@@ -5,6 +5,7 @@
 
 .star {
   width: 30px;
+  margin-right: 10px;
 }
 
 .btn-primary.outline {
@@ -37,5 +38,5 @@
 
 .outline:hover {
   text-decoration: none;
-  
+
 }
