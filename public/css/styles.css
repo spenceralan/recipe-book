@@ -1,0 +1,41 @@
+#of_recipes {
+  font-size: 15px;
+  color: #dadada;
+}
+
+.star {
+  width: 30px;
+}
+
+.btn-primary.outline {
+  background: none;
+	padding: 12px 22px;
+	border: 2px solid #0099cc;
+	color: #0099cc;
+}
+
+.btn-warning.outline {
+  background: none;
+	padding: 12px 22px;
+	border: 2px solid #f0ad4e;
+	color: #f0ad4e;
+}
+
+.btn-success.outline {
+  background: none;
+	padding: 12px 22px;
+	border: 2px solid #5cb85c;
+	color: #5cb85c;
+}
+
+.btn-danger.outline {
+  background: none;
+	padding: 12px 22px;
+	border: 2px solid #d9534f;
+	color: #d9534f;
+}
+
+.outline:hover {
+  text-decoration: none;
+  
+}

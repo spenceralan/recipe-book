@@ -1,0 +1,20 @@
+<h1><%= @recipe.name %></h1>
+<div class="row">
+  <div class="col-md-6">
+    <% @recipe.rating.times do %>
+    <img class="star" src="/img/star.png">
+    <% end %>
+    <h3><%= @recipe.instructions %></h3>
+  </div>
+  <div class="col-md-6">
+    <div id="ingredients" class="row">
+      <h2>Ingredients</h2>
+      <hr>
+    </div>
+    <div id="tags" class="row">
+      <h2>Tags</h2>
+      <hr>
+    </div>
+  </div>
+</div>
+<a href="<%= @recipe.id %>/edit" class="btn-lg btn-warning outline">Edit Recipe</a>

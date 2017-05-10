@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="col-md-6">
+    <h1>Edit <%= @ingredient.name %></h1>
+    <form action="/ingredients" method="post">
+      <input type="hidden" name="_method" value="patch">
+      <input type="hidden" name="ingredient-id" value="<%= @ingredient.id %>">
+      <label for="ingredient-name">Ingredient Name:</label>
+      <input type="text" name="ingredient-name" class="form-control" value="<%= @ingredient.name %>">
+      <br>
+      <button type="submit" class="btn-lg btn-success outline">Update Ingredient</button>
+    </form>
+  </div>
+</div>
+<br>
+<form action="/ingredients" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <input type="hidden" name="ingredient-id" value="<%= @ingredient.id %>">
+  <button type="submit" class="btn-lg btn-danger outline">Delete Ingredient</button>
+</form>

@@ -1,0 +1,27 @@
+<h1>Add a recipe:</h1>
+<form action="/recipes/add" method="post">
+  <div class="row">
+    <div class="col-md-6">
+      <label for="recipe-name">Recipe Name:</label>
+      <input type="text" name="recipe-name" class="form-control">
+      <br>
+      <label for="recipe-instructions">Instructions:</label>
+      <textarea name="recipe-instructions" class="form-control" rows="6"></textarea>
+      <br>
+      <label for="recipe-rating">Rating:</label>
+
+      <select class="form-control" name="recipe-rating">
+        <option value="5">5</option>
+        <option value="4">4</option>
+        <option value="3">3</option>
+        <option value="2">2</option>
+        <option value="1">1</option>
+      </select>
+      <br>
+    </div>
+    <div id="tags" class="col-md-6">
+
+    </div>
+  </div>
+  <button type="submit" class="btn-lg btn-success outline">Add Recipe</button>
+</form>
