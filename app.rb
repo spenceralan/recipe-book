@@ -3,11 +3,34 @@ require "pry"
 Bundler.require(:default)
 Dir[File.dirname(__FILE__) + '/lib/*.rb'].each { |file| require file }
 
+helpers do
+
+  def simple_format(text)
+    text.gsub("\n", "<br>")
+  end
+
+  def capture_boxes(recipe)
+    params.fetch("ingredients", []).each do |ingredient|
+      recipe.ingredients.push(Ingredient.find(ingredient['id']))
+    end
+    params.fetch("tags", []).each do |tag|
+      recipe.tags.push(Tag.find(tag['id']))
+    end
+  end
+
+end
+
 get "/" do
   @recipes = Recipe.all
   @ingredients = Ingredient.all
   @tags = Tag.all
   erb :index
+end
+
+get "/search" do
+  search = params['search'].upcase
+  @results = Recipe.where("upper(name) like ?", "%#{search}%").order("name")
+  erb :search
 end
 
 get "/recipes/add" do
@@ -22,12 +45,7 @@ post "/recipes/add" do
   recipe_instructions = params['recipe-instructions']
   recipe_rating = params['recipe-rating'].to_i
   new_recipe = Recipe.create({name: recipe_name, instructions: recipe_instructions, rating: recipe_rating})
-  params.fetch("ingredients", []).each do |ingredient|
-    new_recipe.ingredients.push(Ingredient.find(ingredient['id']))
-  end
-  params.fetch("tags", []).each do |tag|
-    new_recipe.tags.push(Tag.find(tag['id']))
-  end
+  capture_boxes(new_recipe)
   redirect "/recipes/#{new_recipe.id}"
 end
 
@@ -52,13 +70,7 @@ patch '/recipes' do
   recipe.update({name: recipe_name, instructions: recipe_instructions, rating: recipe_rating})
   recipe.ingredients.clear
   recipe.tags.clear
-
-  params.fetch("ingredients", []).each do |ingredient|
-    recipe.ingredients.push(Ingredient.find(ingredient['id']))
-  end
-  params.fetch("tags", []).each do |tag|
-    recipe.tags.push(Tag.find(tag['id']))
-  end
+  capture_boxes(recipe)
   redirect "/recipes/#{recipe_id}"
 end
 

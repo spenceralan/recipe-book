@@ -99,11 +99,15 @@
    border-left-color: #0099cc;
 }
 
-#ingredients ul {
+.nice-list ul {
   padding: 0;
 }
 
-#ingredients li {
+.nice-list li {
   list-style: none;
   font-size: 20px;
+}
+
+#search {
+  padding-top: 30px;
 }

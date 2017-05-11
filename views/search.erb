@@ -1,0 +1,5 @@
+<h1>Search Results</h1>
+<hr>
+<% @results.each do |result| %>
+  <h3><a href="/recipes/<%= result.id %>"><%= result.name %></a></h3>
+<% end %>
