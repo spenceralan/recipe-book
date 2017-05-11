@@ -1,6 +1,6 @@
   <div class="row">
     <div class="col-md-6">
-      <h2>Add an tag:</h2>
+      <h2><%= @message %></h2>
       <form action="/tags" method="post">
       <label for="tag-name">Tag Name:</label>
       <input type="text" name="tag-name" class="form-control">
@@ -12,7 +12,7 @@
     <div class="col-md-6">
       <h2>Tags:</h2>
       <% @tags.each do |tag| %>
-        <h4><%= tag.name%></h4>
+        <a href="/tags/<%= tag.id %>"><h4><%= tag.name%></h4></a>
       <% end %>
     </div>
   </div>

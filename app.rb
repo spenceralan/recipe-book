@@ -128,14 +128,20 @@ delete "/ingredients" do
 end
 
 get "/tags/add" do
+  @message = "Add a Tag"
   @tags = Tag.all
   erb :tag_add
 end
 
 post "/tags" do
   tag = params.fetch("tag-name")
-  Tag.create({name: tag})
-  redirect back
+  @tags = Tag.all
+  if Tag.create({name: tag}).valid?
+    @message = "Tag added!"
+  else
+    @message = "Tag must be less than 20 characters!"
+  end
+  erb :tag_add
 end
 
 get "/tags/:id" do
