@@ -1,3 +1,4 @@
 class Tag < ActiveRecord::Base
-  has_and_belongs_to_many :recipes
+  has_many :recipe_tags
+  has_many :recipes, through: :recipe_tags
 end

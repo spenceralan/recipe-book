@@ -1,10 +1,6 @@
-require "sinatra"
-require "sinatra/reloader"
-require "sinatra/activerecord"
-require "./lib/ingredient"
-require "./lib/recipe"
-require "./lib/tag"
-require "pry"
+require("bundler/setup")
+Bundler.require(:default)
+Dir[File.dirname(__FILE__) + '/lib/*.rb'].each { |file| require file }
 
 get "/" do
   @recipes = Recipe.all

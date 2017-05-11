@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170510173643) do
+ActiveRecord::Schema.define(version: 20170511152220) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,9 +22,16 @@ ActiveRecord::Schema.define(version: 20170510173643) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "ingredients_recipes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "recipe_ingredients", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "recipe_id"
     t.uuid "ingredient_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "recipe_tags", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "recipe_id"
+    t.uuid "tag_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -33,13 +40,6 @@ ActiveRecord::Schema.define(version: 20170510173643) do
     t.string "name"
     t.text "instructions"
     t.integer "rating"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "recipes_tags", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "recipe_id"
-    t.uuid "tag_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
