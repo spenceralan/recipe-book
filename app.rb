@@ -28,8 +28,22 @@ get "/" do
 end
 
 get "/search" do
-  search = params['search'].upcase
-  @results = Recipe.where("upper(name) like ?", "%#{search}%").order("name")
+  @search = params['search']
+  @results = Recipe.where("upper(name) like ?", "%#{@search.upcase}%")
+  erb :search
+end
+
+get "/search/sort-az" do
+  @search = params['search']
+  results = Recipe.where("upper(name) like ?", "%#{@search.upcase}%")
+  @results = results.sort{ |recipe1, recipe2| recipe1.name.downcase <=> recipe2.name.downcase }
+  erb :search
+end
+
+get "/search/sort-rating" do
+  @search = params['search']
+  results = Recipe.where("upper(name) like ?", "%#{@search.upcase}%")
+  @results = results.sort{ |recipe1, recipe2| recipe2.rating <=> recipe1.rating }
   erb :search
 end
 

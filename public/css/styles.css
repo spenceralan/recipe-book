@@ -111,3 +111,12 @@
 #search {
   padding-top: 30px;
 }
+
+#sort-buttons {
+  padding-top: 15px;
+}
+
+#sort-buttons form {
+  margin-right: 10px;
+  display: inline-block;
+}

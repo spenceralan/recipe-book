@@ -1,4 +1,18 @@
-<h1>Search Results</h1>
+<div class="row">
+  <div class="col-sm-3">
+    <h1>Search Results</h1>
+  </div>
+  <div class="col-sm-8" id="sort-buttons">
+    <form action="/search/sort-az">
+      <input type="hidden" name="search" value="<%= @search %>">
+      <button type="submit" class="btn-lg btn-primary outline">Sort by Name</button>
+    </form>
+    <form action="/search/sort-rating">
+      <input type="hidden" name="search" value="<%= @search %>">
+      <button type="submit" class="btn-lg btn-primary outline">Sort by Rating</button>
+    </form>
+  </div>
+</div>
 <hr>
 <% @results.each do |result| %>
   <h3><a href="/recipes/<%= result.id %>"><%= result.name %></a></h3>
