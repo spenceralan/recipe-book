@@ -9,10 +9,18 @@
   <div class="col-md-6">
     <div id="ingredients" class="row">
       <h2>Ingredients</h2>
+        <ul>
+          <% @recipe.ingredients.each do |ingredient| %>
+            <li><%= ingredient.name %></li>
+          <% end %>
+        </ul>
       <hr>
     </div>
     <div id="tags" class="row">
       <h2>Tags</h2>
+      <% @recipe.tags.each do |tag| %>
+        <div class="tag"><%= tag.name %></div>
+      <% end %>
       <hr>
     </div>
   </div>

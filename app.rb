@@ -1,4 +1,5 @@
-require("bundler/setup")
+require "bundler/setup"
+require "pry"
 Bundler.require(:default)
 Dir[File.dirname(__FILE__) + '/lib/*.rb'].each { |file| require file }
 
@@ -10,6 +11,9 @@ get "/" do
 end
 
 get "/recipes/add" do
+  @recipes = Recipe.all
+  @ingredients = Ingredient.all
+  @tags = Tag.all
   erb :recipe_add
 end
 
@@ -18,6 +22,12 @@ post "/recipes/add" do
   recipe_instructions = params['recipe-instructions']
   recipe_rating = params['recipe-rating'].to_i
   new_recipe = Recipe.create({name: recipe_name, instructions: recipe_instructions, rating: recipe_rating})
+  params.fetch("ingredients", []).each do |ingredient|
+    new_recipe.ingredients.push(Ingredient.find(ingredient['id']))
+  end
+  params.fetch("tags", []).each do |tag|
+    new_recipe.tags.push(Tag.find(tag['id']))
+  end
   redirect "/recipes/#{new_recipe.id}"
 end
 
@@ -39,7 +49,16 @@ patch '/recipes' do
   recipe_instructions = params['recipe-instructions']
   recipe_rating = params['recipe-rating'].to_i
   recipe = Recipe.find(recipe_id)
-  recipe = Recipe.update({name: recipe_name, instructions: recipe_instructions, rating: recipe_rating})
+  recipe.update({name: recipe_name, instructions: recipe_instructions, rating: recipe_rating})
+  recipe.ingredients.clear
+  recipe.tags.clear
+
+  params.fetch("ingredients", []).each do |ingredient|
+    recipe.ingredients.push(Ingredient.find(ingredient['id']))
+  end
+  params.fetch("tags", []).each do |tag|
+    recipe.tags.push(Tag.find(tag['id']))
+  end
   redirect "/recipes/#{recipe_id}"
 end
 

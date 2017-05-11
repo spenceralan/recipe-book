@@ -25,7 +25,7 @@
         <hr>
         <div class="form-check">
           <% Ingredient.all.each do |ingredient| %>
-            <%= @recipe.ingredients.include?(ingredient) ? "<div class='checkbox'><label><input value='#{ingredient.id}' type='checkbox' name='ingredients' checked>#{ingredient.name}</label></div>" : "<div class='checkbox'><label><input value='#{ingredient.id}' type='checkbox' name='ingredients'>#{ingredient.name}</label></div>" %>
+            <%= @recipe.ingredients.include?(ingredient) ? "<div class='checkbox'><label><input value='#{ingredient.id}' type='checkbox' name='ingredients[][id]' checked>#{ingredient.name}</label></div>" : "<div class='checkbox'><label><input value='#{ingredient.id}' type='checkbox' name='ingredients[][id]'>#{ingredient.name}</label></div>" %>
           <% end %>
         </div>
       </div>
@@ -34,7 +34,7 @@
         <hr>
         <div class="form-check">
           <% Tag.all.each do |tag| %>
-            <%= @recipe.tags.include?(tag) ? "<div class='checkbox'><label><input value='#{tag.id}' type='checkbox' name='tags' checked>#{tag.name}</label></div>" : "<div class='checkbox'><label><input value='#{tag.id}' type='checkbox' name='tags'>#{tag.name}</label></div>" %>
+            <%= @recipe.tags.include?(tag) ? "<div class='checkbox'><label><input value='#{tag.id}' type='checkbox' name='tags[][id]' checked>#{tag.name}</label></div>" : "<div class='checkbox'><label><input value='#{tag.id}' type='checkbox' name='tags[][id]'>#{tag.name}</label></div>" %>
           <% end %>
         </div>
       </div>

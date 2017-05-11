@@ -19,8 +19,26 @@
       </select>
       <br>
     </div>
-    <div id="tags" class="col-md-6">
-
+    <div class="col-md-1"></div>
+    <div class="col-md-5">
+      <div id="ingredients" class="row">
+        <h2>Ingredients</h2>
+        <hr>
+        <div class="form-check">
+          <% @ingredients.each do |ingredient| %>
+            <div class="checkbox"><label><input value="<%= ingredient.id %>" type="checkbox" name="ingredients[][id]"><%= ingredient.name %></label></div>
+          <% end %>
+        </div>
+      </div>
+      <div id="tags" class="row">
+        <h2>Tags</h2>
+        <hr>
+        <div class="form-check">
+          <% @tags.each do |tag| %>
+            <div class="checkbox"><label><input value="<%= tag.id %>" type="checkbox" name="tags[][id]"><%= tag.name %></label></div>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
   <button type="submit" class="btn-lg btn-success outline">Add Recipe</button>
