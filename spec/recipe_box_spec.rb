@@ -1,50 +1,28 @@
 require "spec_helper"
 
-describe "Recipe" do
-  describe '#ingredients' do
-    it "tells which ingredients are associated with this recipe" do
-      test_ingredient = Ingredient.create({name: 'meat'})
-      test_recipe = Recipe.create({name: 'Raw Meat Platter'})
-      test_recipe.ingredients.push(test_ingredient)
-      expect(test_recipe.ingredients).to eq([test_ingredient])
-    end
-  end
-
-  describe '#tags' do
-    it "tells which tags are associated with this recipe" do
-      test_tag = Tag.create({name: "yum-e"})
-      test_ingredient = Ingredient.create({name: 'meat'})
-      test_recipe = Recipe.create({name: 'Raw Meat Platter'})
-      test_recipe.ingredients.push(test_ingredient)
-      test_recipe.tags.push(test_tag)
-      expect(test_recipe.tags).to eq([test_tag])
-    end
-  end
-
+describe Recipe do
+  it { should have_many :ingredients }
+  it { should have_many :tags }
+  it { should_not allow_value("blahblah" * 10).for(:name) }
+  it { is_expected.to callback(:capitalize_title).before(:save) }
 end
 
-describe "Ingredient" do
-
-  describe '#recipes' do
-    it "tells which recipes are associated with this ingredient" do
-      test_ingredient = Ingredient.create({name: 'meat'})
-      test_recipe = Recipe.create({name: 'Raw Meat Platter'})
-      test_recipe.ingredients.push(test_ingredient)
-      expect(test_ingredient.recipes).to eq([test_recipe])
-    end
-  end
-
+describe Tag do
+  it { should have_many :recipes }
+  it { should_not allow_value("blahblah" * 10).for(:name) }
 end
 
-describe "Tag" do
+describe Ingredient do
+  it { should have_many :recipes }
+  it { should_not allow_value("blahblah" * 10).for(:name) }
+end
 
-  describe '#recipes' do
-    it "tells which recipes are associated with this tag" do
-      test_tag = Tag.create({name: "yum-e"})
-      test_recipe = Recipe.create({name: 'Raw Meat Platter'})
-      test_recipe.tags.push(test_tag)
-      expect(test_tag.recipes).to eq([test_recipe])
-    end
-  end
+describe RecipeIngredient do
+  it { should belong_to :recipe }
+  it { should belong_to :ingredient }
+end
 
+describe RecipeTag do
+  it { should belong_to :recipe }
+  it { should belong_to :tag }
 end

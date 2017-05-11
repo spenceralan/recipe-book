@@ -2,7 +2,7 @@
 <div class="row">
   <div class="col-md-6">
     <% @recipe.rating.times do %>
-    <img class="star" src="/img/star.png">
+    <img class="star animated bounce" src="/img/star.png">
     <% end %>
     <h3><%= simple_format(@recipe.instructions) %></h3>
   </div>
